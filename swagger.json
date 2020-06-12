@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "stats",
+    "version": "1.0"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "GET /user",
+        "operationId": "Get endpoint example",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/successResponse"
+            }
+          }
+        },
+        "tags": [
+          "Generic"
+        ]
+      },
+      "post": {
+        "summary": "POST /user",
+        "operationId": "Post endpoint example",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/successResponse"
+            }
+          }
+        },
+        "tags": [
+          "Generic"
+        ]
+      }
+    },
+    "/user/{id}": {
+      "put": {
+        "summary": "PUT /user/:id",
+        "operationId": "Put endpoint example",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "format": "number",
+            "description": "Numeric ID"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "type": "object",
+            "required": true,
+            "description": "User object",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/successResponse"
+            }
+          }
+        },
+        "tags": [
+          "Generic"
+        ]
+      },
+      "delete": {
+        "summary": "DELETE /user/:id",
+        "operationId": "Delete endpoint example",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "format": "number",
+            "description": "Numeric ID"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/successResponse"
+            }
+          }
+        },
+        "tags": [
+          "Generic"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "successResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string",
+          "format": "string"
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

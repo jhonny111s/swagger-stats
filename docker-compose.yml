@@ -1,0 +1,27 @@
+version: '3'
+services:
+  api:
+    image: sample-express-app
+    container_name: api
+    build: .
+    networks:
+      - backend
+    ports:
+      - "4000:4000"
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    expose:
+      - 9090
+    ports:
+      - "9090:9090" 
+    networks:
+      - backend
+
+
+networks:
+  backend:
+    driver: bridge
