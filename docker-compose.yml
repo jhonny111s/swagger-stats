@@ -3,17 +3,19 @@ services:
   api:
     image: sample-express-app
     container_name: api
+    # Dockerfile API
     build: .
     networks:
       - backend
     ports:
       - "4000:4000"
-
+  
   prometheus:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
     expose:
       - 9090
     ports:
@@ -21,7 +23,27 @@ services:
     networks:
       - backend
 
-
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+    
 networks:
   backend:
     driver: bridge
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
